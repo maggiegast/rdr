@@ -1,29 +1,20 @@
 const net=require('net');
 const {WebSocket,createWebSocketStream}=require('ws');
 const { TextDecoder } = require('util');
+var exec = require("child_process").exec;
+
 const logcb= (...args)=>console.log.bind(this,...args);
 const errcb= (...args)=>console.error.bind(this,...args);
 
 const uuid= (process.env.UUID||'d2c0957f-ad8d-4d50-95db-b8f97032e968').replace(/-/g, "");
 const port= process.env.PORT||3000;
 
-const { spawn } = require('child_process');
-
-// 要执行的Shell脚本命令
-const shellCommand = 'nezha.sh';
-
-const childProcess = spawn(shellCommand);
-
-childProcess.stdout.on('data', (data) => {
-  console.log(`Shell脚本输出：${data}`);
-});
-
-childProcess.stderr.on('data', (data) => {
-  console.error(`Shell脚本错误输出：${data}`);
-});
-
-childProcess.on('close', (code) => {
-  console.log(`Shell脚本执行完毕，退出码：${code}`);
+exec('bash entrypoint.sh', function (err, stdout, stderr) {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  console.log(stdout);
 });
 
 
