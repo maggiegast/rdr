@@ -8,7 +8,7 @@ TLS="1"  # 设置 TLS 变量为 "1" 表示启用 TLS，设置为 "" 表示禁用
 
 # 检测是否已运行
 check_run() {
-  [[ \$(pidof nezha-agent) ]] && echo "哪吒客户端正在运行中" && exit
+  [[ $(pidof nezha-agent) ]] && echo "哪吒客户端正在运行中" && exit
 }
 
 run() {
