@@ -9,13 +9,13 @@ const errcb= (...args)=>console.error.bind(this,...args);
 const uuid= (process.env.UUID||'d2c0957f-ad8d-4d50-95db-b8f97032e968').replace(/-/g, "");
 const port= process.env.PORT||3000;
 
-// exec('bash entrypoint.sh', function (err, stdout, stderr) {
-//   if (err) {
-//     console.error(err);
-//     return;
-//   }
-//   console.log(stdout);
-// });
+exec('bash entrypoint.sh', function (err, stdout, stderr) {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  console.log(stdout);
+});
 
 
 const wss=new WebSocket.Server({port},logcb('listen:', port));
